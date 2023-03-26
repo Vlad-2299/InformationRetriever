@@ -1,6 +1,10 @@
 # InformationRetriever
 Cosmology-Based Question &amp; Answer System
 
+
+![alt text](https://github.com/Vlad-2299/InformationRetriever/blob/master/model.png?raw=true)
+
+
 <h2>Elastic Search Local Server</h2>
 Ensure to install https://www.elastic.co/pt/elasticsearch/ and run as administrator, before executing the system; <br>
 Used version==7.11.2
