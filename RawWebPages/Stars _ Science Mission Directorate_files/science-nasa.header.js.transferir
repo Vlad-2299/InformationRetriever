@@ -1,0 +1,20 @@
+(function ($) {
+  'use strict';
+
+   // Handle scroll behavior that changes background on header.
+   Drupal.behaviors.scienceNasaHeaderScroll = {
+     'attach': function(context, settings) {
+       var header = $('.site-header--sticky');
+
+       $(window).scroll(Drupal.debounce(function() {
+         if ($(window).scrollTop() > 82) {
+           header.addClass('site-header--in-scroll');
+         }
+         else {
+           header.removeClass('site-header--in-scroll');
+         }
+       }, 100));
+     }
+   };
+
+})(jQuery);

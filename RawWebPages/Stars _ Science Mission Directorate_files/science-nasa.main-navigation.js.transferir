@@ -1,0 +1,53 @@
+(function ($) {
+  'use strict';
+
+  // This behavior stops the faked "header" link items from being clickable.
+  // They're just for looks.
+  Drupal.behaviors.scienceNasaMainNavigationHeaders = {
+    'attach': function (context, settings) {
+      $('.site-header__main-nav-header-item').click(function(event) {
+        event.preventDefault();
+      });
+    }
+  };
+
+  // Handle toggling of mobile version of main navigation.
+  Drupal.behaviors.scienceNasaMainNavigationMobile = {
+    'attach': function (context, settings) {
+      var mobileToggleButton = $('.site-header__main-nav-mobile-toggle');
+
+      mobileToggleButton.click(function(e) {
+        e.preventDefault();
+        $(this).toggleClass('active').blur();
+        $('.site-header__navigation').toggleClass('site-header__navigation--active');
+        $('.site-header__main-nav-container').toggleClass('site-header__main-nav-container--active');
+      });
+    }
+  };
+
+  Drupal.behaviors.scienceNasaHeaderSearch = {
+    'attach': function (context, settings) {
+      $('.site-header__search-form input').blur(function() {
+        this.value = '';
+      });
+    }
+  };
+
+  // Handle Sub-nav dropdowns of main navigation.
+  Drupal.behaviors.scienceNasaMainNavigationSubNav = {
+    'attach': function (context, settings) {
+      var menuParents = $('.site-header__main-nav-item');
+      menuParents
+        .on('mouseover', function(e) {
+          e.stopPropagation();
+          $('.site-header__sub-nav--active').removeClass('site-header__sub-nav--active');
+          if ($(this).children('.site-header__sub-nav').children().length !== 0) {
+            $(this).children('.site-header__sub-nav').toggleClass('site-header__sub-nav--active');
+          }
+        })
+        .on('mouseout', function(e) {
+          $('.site-header__sub-nav--active').removeClass('site-header__sub-nav--active');
+        });
+    }
+  };
+})(jQuery);

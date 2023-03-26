@@ -1,0 +1,65 @@
+(function ($) {
+  Drupal.behaviors.searchExpandAnimation = {
+    attach: function (context, settings) {
+    	var fadeSpeed = 100;
+    	// Get search box elements
+		var searchContainer = $('.views-exposed-form-es-connector-view-elasticsearch-results-by-fields');
+		var searchBox = $('.views-exposed-form', searchContainer);
+		var submitIcon = $('.form-submit', searchContainer);
+		var inputBox = $('.form-text', searchContainer);
+
+		// Add search icon element to show and hide search bar
+		searchContainer.append('<div class="search-icon"></div>');
+		var searchIcon = $('.search-icon', searchContainer);
+
+		// Click behavior for showing and hiding search bar
+		var isOpen = false;
+		searchIcon.click(function(){
+			if(isOpen == false){
+				searchBox.fadeIn(fadeSpeed);
+				searchContainer.addClass('search-box-active');
+				inputBox.focus();
+				isOpen = true;
+			} else {
+				searchBox.fadeOut(fadeSpeed);
+				searchContainer.removeClass('search-box-active');
+				inputBox.focusout();
+				isOpen = false;
+			}
+		});
+		// Register these clicks as false so that search bar isn't hidden
+		searchIcon.mouseup(function(){
+			return false;
+		});
+		submitIcon.mouseup(function(){
+			return false;
+		});
+		searchBox.mouseup(function(){
+			return false;
+		});
+		// If click happens outside search bar, hide the search bar
+		$(document).mouseup(function(){
+			if(isOpen == true){
+				searchIcon.click();
+			}
+		});
+		if(!($('#block-wolfram-definition-wa').hasClass('togglesOn'))){
+			$('#block-wolfram-definition-wa').addClass('togglesOn');
+			
+			$('.wa-source-toggle').click(function(){
+				$(this).parent().toggleClass('open');
+			});
+			$('.wa-source-category-toggle').click(function(){
+				$(this).parent().toggleClass('open');
+			});
+
+			$('.wa-info-toggle').click(function(){
+				$(this).parent().toggleClass('open');
+			});
+			$('.wa-info-category-toggle').click(function(){s
+				$(this).parent().toggleClass('open');
+			});
+		}
+    }
+  };
+})(jQuery);
